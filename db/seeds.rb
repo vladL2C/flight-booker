@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#Airports Data
+#Airports Seed Data
 airports = ["Auckland","Wellington","Christchurch",
             "Queenstown", "Dunedin", "Rotorua"]
 
@@ -16,4 +16,21 @@ airport_codes = ["AKL", "WLG", "CHC",
 airports.each_with_index do |airport,code|
   Airport.create(code: airport_codes[code],
                   name: airport)
-end                 
+end  
+
+#Flights Seed Data
+fn = 200
+d = 1.5
+Airport.all.each do |departing|
+	Airport.all.each do |arriving|
+		unless departing == arriving
+		Flight.create(departing: departing,
+									arriving: arriving,
+									flight_number: fn,
+									duration: d)
+		d += 0.5
+		fn += 1
+		end  
+	end
+end  
+							               
