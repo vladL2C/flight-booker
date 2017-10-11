@@ -1,4 +1,4 @@
-<section class="columns section">
+
 	<div class="row">
   <div class="col-md-6 col-md-offset-3">
 <%= form_tag("/flights", method: "get") do %>
@@ -17,21 +17,20 @@
   <%= submit_tag "Find Flight", class: "btn btn-primary" %>
 	</div>
 	</div>
-</section>
+
  <% end %> 
 
-<section>
+<% unless @flights.nil? %>
+	<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 <table class="table table-bordered">
-<% unless @flights.blank? %>
 	<th> Flight Number </th>
 	<th> Departing </th>
 	<th> Arriving </th>
 	<th> Date </th>
 	<th> Duration </th>
-
-
-	<% @flights.each do |f| %>
 	<tbody>
+	<% @flights.each do |f| %>
 	<td><%= hidden_field_tag(:passenger, params[:flight][:passenger]) %>
 	<%= radio_button_tag(:selected, :checked, f.id) %>
 	<%= f.flight_number %></td>
@@ -39,8 +38,11 @@
 	<td><%= f.arriving.name %></td>
 	<td><%= f.date_formatted %></td>
 	<td><%= f.duration_format %></td>
-</tbody>
-</table>
 	<% end %>
-</section>
+		</tbody>
+  </table>
+  </div>
+ </div>
 <% end %>
+
+

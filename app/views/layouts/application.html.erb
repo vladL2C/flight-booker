@@ -9,7 +9,22 @@
   </head>
 
   <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
+          <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %> alert-dismissible">
+              <button type='button' class='close fade' data-dismiss='alert'>
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <%= message %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <%= yield %>
-    <%= debug(params) if Rails.env.development? %>
+  </div>
+  <%= debug(params) if Rails.env.development? %>
   </body>
+
 </html>

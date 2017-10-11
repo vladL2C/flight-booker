@@ -7,7 +7,10 @@ class FlightsController < ApplicationController
                               arriving_id: params[:flight][:arriving_id])
       @departing = Airport.find(params[:flight][:departing_id])
       @arriving = Airport.find(params[:flight][:arriving_id]) 
-    end   
+     	if @flights.empty?
+    	flash[:warning] = "No flights"
+    	redirect_to flights_path 
+    	end 	 
+    end
   end 
-
 end
