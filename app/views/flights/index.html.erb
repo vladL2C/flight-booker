@@ -1,20 +1,33 @@
 <section class="columns section">
 <%= form_tag("/flights", method: "get") do %>
   <label for="departing">Departing</label>
-  <%= collection_select(:flight, :departing_id, Airport.all, :id , :name) %> <br>
+  <%= collection_select(:flight, :departing_id, Airport.all, :id , :airport_name) %> <br>
 
   <label for="departing">Arriving</label>
-  <%= collection_select(:flight, :arriving_id, Airport.all, :id , :name) %> <br>
+  <%= collection_select(:flight, :arriving_id, Airport.all, :id , :airport_name) %> <br>
 
   <label for="passengers">Passengers</label>
   <%= select(:flight, :passenger, @passengers) %><br>
 
   <label for="date">Date</label>
-  <%= collection_select(:flight, :date, Flight.dates, :date, :date_formatted) %>
+  <%= collection_select(:flight, :date, Flight.date_list, :date, :date_formatted) %>
 
 </section>
-<%= submit_tag("Search") %>
+  <%= submit_tag "Find Flight" %>
 
  <% end %> 
 
+<section>
+<%= @flights.empty? %><br>
+<% unless @flights.empty? %>
+	<% @flights.each do |f| %>
+	<%= radio_button_tag(:selected, :checked, f.id) %>
+	<%= f.flight_number %>
+	<%= f.arriving.name %>
+	<%= f.departing.name %>
+	<%= f.date_formatted %>
+	<%= f.duration_format %>
 
+	<% end %>
+</section>
+<% end %>
