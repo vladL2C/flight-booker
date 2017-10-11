@@ -1,0 +1,20 @@
+<section class="columns section">
+<%= form_tag("/flights", method: "get") do %>
+  <label for="departing">Departing</label>
+  <%= collection_select(:flight, :departing_id, Airport.all, :id , :name) %> <br>
+
+  <label for="departing">Arriving</label>
+  <%= collection_select(:flight, :arriving_id, Airport.all, :id , :name) %> <br>
+
+  <label for="passengers">Passengers</label>
+  <%= select(:flight, :passenger, @passengers) %><br>
+
+  <label for="date">Date</label>
+  <%= collection_select(:flight, :date, Flight.dates, :date, :date_formatted) %>
+
+</section>
+<%= submit_tag("Search") %>
+
+ <% end %> 
+
+

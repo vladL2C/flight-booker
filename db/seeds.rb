@@ -20,14 +20,17 @@ end
 
 #Flights Seed Data
 fn = 200
+n = 1
 Airport.all.each do |departing|
 	Airport.all.each do |arriving|
 		unless departing == arriving
 		Flight.create(departing: departing,
 									arriving: arriving,
 									flight_number: fn,
-									duration: rand(1..3))
+									duration: rand(1..3),
+                  date: Time.new + n.days)
 		fn += 1
+    n += 1
 		end  
 	end
 end  
