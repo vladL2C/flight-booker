@@ -1,33 +1,46 @@
 <section class="columns section">
+	<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 <%= form_tag("/flights", method: "get") do %>
   <label for="departing">Departing</label>
-  <%= collection_select(:flight, :departing_id, Airport.all, :id , :airport_name) %> <br>
+  <%= collection_select(:flight, :departing_id, Airport.all, :id , :airport_name, {}, { type: 'text', class: "form-control"}) %> <br>
 
   <label for="departing">Arriving</label>
-  <%= collection_select(:flight, :arriving_id, Airport.all, :id , :airport_name) %> <br>
+  <%= collection_select(:flight, :arriving_id, Airport.all, :id , :airport_name, {}, { type: 'text', class: "form-control"}) %> <br>
 
   <label for="passengers">Passengers</label>
-  <%= select(:flight, :passenger, @passengers) %><br>
+  <%= select(:flight, :passenger, @passengers, {}, { type: 'text', class: "form-control"}) %><br>
 
   <label for="date">Date</label>
-  <%= collection_select(:flight, :date, Flight.date_list, :date, :date_formatted) %>
+  <%= collection_select(:flight, :date, Flight.date_list, :date, :date_formatted, {}, { type: 'text', class: "form-control"}) %>
 
+  <%= submit_tag "Find Flight", class: "btn btn-primary" %>
+	</div>
+	</div>
 </section>
-  <%= submit_tag "Find Flight" %>
-
  <% end %> 
 
 <section>
-<%= @flights.empty? %><br>
-<% unless @flights.empty? %>
-	<% @flights.each do |f| %>
-	<%= radio_button_tag(:selected, :checked, f.id) %>
-	<%= f.flight_number %>
-	<%= f.arriving.name %>
-	<%= f.departing.name %>
-	<%= f.date_formatted %>
-	<%= f.duration_format %>
+<table class="table table-bordered">
+<% unless @flights.blank? %>
+	<th> Flight Number </th>
+	<th> Departing </th>
+	<th> Arriving </th>
+	<th> Date </th>
+	<th> Duration </th>
 
+
+	<% @flights.each do |f| %>
+	<tbody>
+	<td><%= hidden_field_tag(:passenger, params[:flight][:passenger]) %>
+	<%= radio_button_tag(:selected, :checked, f.id) %>
+	<%= f.flight_number %></td>
+	<td><%= f.departing.name %></td>
+	<td><%= f.arriving.name %></td>
+	<td><%= f.date_formatted %></td>
+	<td><%= f.duration_format %></td>
+</tbody>
+</table>
 	<% end %>
 </section>
 <% end %>
