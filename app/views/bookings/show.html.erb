@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+ <table class="table table-hover"> 
+  <th> Flight Number </th>
+  <th> Departing </th>
+  <th> Arriving </th>
+  <th> Date </th>
+  <th> Duration </th>
+  <tbody>
+  <td><%= @booking.flight.flight_number %></td>
+  <td><%= @booking.flight.departing.name %></td>
+  <td><%= @booking.flight.arriving.name %></td>
+  <td><%= @booking.flight.date_formatted %></td>
+  <td><%= @booking.flight.duration_format %></td>
+  
+  
+    </tbody>
+  </table>
+
+  <table class="table table-hover"> 
+  <th>Passengers</th>
+  <tbody>
+    <% @booking.passengers.each do |passenger| %>
+      <td><p>Name:</p><%= passenger.name %></td>
+      <td><p>Email:</p><%= passenger.email %></td>
+      <% end %>
+  </tbody>
+  </table>
+
+  
+  </div>
+ </div>
