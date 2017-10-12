@@ -34,7 +34,7 @@
 	<tbody>
 	<% @flights.each do |f| %>
 	<td><%= hidden_field_tag(:passenger, params[:flight][:passenger]) %>
-	<%= radio_button_tag(:flight_id, f.id, :checked,) %>
+	<%= radio_button_tag(:flight_id, f.id, :checked) %>
 	<%= f.flight_number %></td>
 	<td><%= f.departing.name %></td>
 	<td><%= f.arriving.name %></td>

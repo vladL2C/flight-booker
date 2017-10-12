@@ -1,8 +1,10 @@
-<%= form_for @booking do |f| %>
+<%= form_for(@booking, url: booking_path) do |f| %>
   <%= f.fields_for :passengers do |passenger| %>
     Name: <%= passenger.text_field :name %>
     Email: <%= passenger.email_field :email %>
   <% end %>
-  <%= f.hidden_field "flight_id", value: @flight %>
+  <%= f.hidden_field :flight_id, value: @flight %>
   <%= f.submit 'Make That booking' %> 
   <% end %>
+
+  <%= @flight %>

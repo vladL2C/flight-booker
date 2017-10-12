@@ -2,19 +2,21 @@ class BookingsController < ApplicationController
  
   def new
   @number = params[:passenger].to_i
-  @flight = params[:flight_id] 
+  @flight = params[:flight_id]
   @booking = Booking.new
   @booking.passengers.build
   end
 
   def create
+    @flight = params[:flight_id]
     @booking = Booking.new(booking_params)
     if @booking.save 
       flash[:success] = "You have booked the flight"
       redirect_to booking_url(@booking)
     else
+      @flight = params[:booking][:flight_id]
       flash.now[:warning] = "try again"
-      render 'new'
+      render :new
     end   
 
   end  
