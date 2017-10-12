@@ -21,9 +21,11 @@
  <% end %> 
 
 <% unless @flights.nil? %>
+<hr>
 	<div class="row">
   <div class="col-md-6 col-md-offset-3">
-<table class="table table-bordered">
+  <%= form_tag("bookings/new", method: "get") do %> 
+ <table class="table table-bordered"> 
 	<th> Flight Number </th>
 	<th> Departing </th>
 	<th> Arriving </th>
@@ -32,15 +34,17 @@
 	<tbody>
 	<% @flights.each do |f| %>
 	<td><%= hidden_field_tag(:passenger, params[:flight][:passenger]) %>
-	<%= radio_button_tag(:selected, :checked, f.id) %>
+	<%= radio_button_tag(:flight_id, f.id, :checked,) %>
 	<%= f.flight_number %></td>
 	<td><%= f.departing.name %></td>
 	<td><%= f.arriving.name %></td>
 	<td><%= f.date_formatted %></td>
 	<td><%= f.duration_format %></td>
-	<% end %>
+  <% end %>
 		</tbody>
   </table>
+  <%= submit_tag "Book This Flight", class: "btn btn-primary" %>
+  <% end %>
   </div>
  </div>
 <% end %>
