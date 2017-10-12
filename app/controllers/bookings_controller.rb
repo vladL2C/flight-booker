@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
   @number = params[:passenger].to_i
   @flight = params[:flight_id]
   @booking = Booking.new
-  @booking.passengers.build
+  @number.times { @booking.passengers.build }
   end
 
   def create
