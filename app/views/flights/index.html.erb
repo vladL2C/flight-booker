@@ -1,52 +1,6 @@
-
-	<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-<%= form_tag("/flights", method: "get") do %>
-  <label for="departing">Departing</label>
-  <%= collection_select(:flight, :departing_id, Airport.all, :id , :airport_name, {}, { type: 'text', class: "form-control"}) %> <br>
-
-  <label for="departing">Arriving</label>
-  <%= collection_select(:flight, :arriving_id, Airport.all, :id , :airport_name, {}, { type: 'text', class: "form-control"}) %> <br>
-
-  <label for="passengers">Passengers</label>
-  <%= select(:flight, :passenger, @passengers, {}, { type: 'text', class: "form-control"}) %><br>
-
-  <label for="date">Date</label>
-  <%= collection_select(:flight, :date, Flight.date_list, :date, :date_formatted, {}, { type: 'text', class: "form-control"}) %>
-
-  <%= submit_tag "Find Flight", class: "btn btn-primary" %>
-	</div>
-	</div>
-
- <% end %> 
-
+<%= render('search_flight') %>
 <% unless @flights.nil? %>
-<hr>
-	<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-  <%= form_tag("bookings/new", method: "get") do %> 
- <table class="table table-bordered"> 
-	<th> Flight Number </th>
-	<th> Departing </th>
-	<th> Arriving </th>
-	<th> Date </th>
-	<th> Duration </th>
-	<tbody>
-	<% @flights.each do |f| %>
-	<td><%= hidden_field_tag(:passenger, params[:flight][:passenger]) %>
-	<%= radio_button_tag(:flight_id, f.id, :checked) %>
-	<%= f.flight_number %></td>
-	<td><%= f.departing.name %></td>
-	<td><%= f.arriving.name %></td>
-	<td><%= f.date_formatted %></td>
-	<td><%= f.duration_format %></td>
-  <% end %>
-		</tbody>
-  </table>
-  <%= submit_tag "Book This Flight", class: "btn btn-primary" %>
-  <% end %>
-  </div>
- </div>
+  <%= render('available_flights') %>
 <% end %>
 
 

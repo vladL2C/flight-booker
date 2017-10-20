@@ -23,7 +23,8 @@ class BookingsController < ApplicationController
 
   end  
 
-  def show 
+  def show
+  @booking = Booking.find(params[:id]) 
   end
 
   private
