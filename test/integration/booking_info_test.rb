@@ -2,10 +2,12 @@ require 'test_helper'
 
 class BookingInfoTest < ActionDispatch::IntegrationTest
 
-  test "valid booking" do
-    assert_difference 'Booking.count' do 
-      post bookings_path, params: { booking: { passengers_attributes: { "0" =>{name: "vlad", email: "vlad@hotmail.co.nz"}}, flight_id: 3}}
+    test "booking should work" do 
+    assert_difference 'Booking.count', 1 do
+      post bookings_path, params: {booking: {
+        flight_id: 1, passengers_attributes: { 
+          "0" => {name: "tester", email: "tester@gmail.com"}}}}
     end
-  end 
+  end
 
 end
