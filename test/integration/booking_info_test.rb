@@ -3,7 +3,7 @@ require 'test_helper'
 class BookingInfoTest < ActionDispatch::IntegrationTest
 
     def setup
-      @flight = flights(:one)
+      ActionMailer::Base.deliveries.clear
     end 
 
     test "test valid booking" do 
@@ -13,6 +13,7 @@ class BookingInfoTest < ActionDispatch::IntegrationTest
             "0" => {name: "tester", email: "tester@gmail.com"}}}}
       end
       follow_redirect!
+      assert_equal 1, ActionMailer::Base.deliveries.size
       assert_template 'bookings/show'
   end
 
