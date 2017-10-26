@@ -15,6 +15,16 @@ class BookingInfoTest < ActionDispatch::IntegrationTest
       follow_redirect!
       assert_equal 1, ActionMailer::Base.deliveries.size
       assert_template 'bookings/show'
-  end
+    end
+
+    test "test invalid booking" do 
+      assert_no_difference 'Booking.count' do
+        post bookings_path, params: {booking: {
+          flight_id: "", passengers_attributes: { 
+            "0" => {name: "", email: ""}}}}
+      end
+      assert_not flash.empty?
+      assert_template 'bookings/new'
+    end
 
 end
