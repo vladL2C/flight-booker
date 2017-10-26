@@ -1,3 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+one:
+  id: 1
+  departing_id: 1
+  arriving_id: 2
+  flight_number: 4
+  duration: 3
+  date: 2017-10-13 20:20:21 
 

@@ -1,3 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+airport:
+  id: 1
+  code: AKL
+  name: Auckland
+
+airport2:
+  id: 2
+  code: DUD
+  name: Dunedin  
 
 
