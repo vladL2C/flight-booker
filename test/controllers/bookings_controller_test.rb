@@ -1,7 +1,12 @@
 require 'test_helper'
 
 class BookingsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  
+
+  test "should get new booking path" do 
+    get bookings_path 
+    assert_response :success
+  end
+  
+
 end

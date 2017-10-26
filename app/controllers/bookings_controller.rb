@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
   def create
     @flight = params[:flight_id]
     @booking = Booking.new(booking_params)
-    if @booking.save 
+    if @booking.save
       @booking.passengers.each do |passenger|
         PassengerMailer.thank_you_email(passenger).deliver_now
       end 
@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
   end  
 
   def show
-  @booking = Booking.find(params[:id]) 
+    @booking = Booking.find(params[:id]) 
   end
 
   private
